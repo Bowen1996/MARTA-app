@@ -39,10 +39,12 @@ function initialize() {
   directionsDisplay = new google.maps.DirectionsRenderer();
   var mapOptions = {
     zoom: 14,
-    center: new google.maps.LatLng(41.850033, -87.6500523) //INPUT CURRENT USER LOCATION HERE
+    center: new google.maps.LatLng(34.0753760, -84.2940900) //INPUT CURRENT USER LOCATION HERE
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
+  var transitLayer = new google.maps.TransitLayer();
+  transitLayer.setMap(map);
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
