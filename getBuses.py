@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import urllib.request
+import requests
 import json
 import datetime
 import sys
@@ -9,7 +9,7 @@ import sys
 def getBuses(route=''):
 
 	#Base URL for MARTA API
-	base = 'http://developer.itsmarta.com/BRDRestService/BRDRestService.svc/'
+	base = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/'
 
 	# If user does not input a value for route number, use 'GetAllBus' API call
 	if route == '':
@@ -17,12 +17,12 @@ def getBuses(route=''):
 
 	# Else, use 'GetBusByRoute' API call with user-defined route number
 	else:
-		query = 'GetBusByRoute/' + route
+		query = 'GetBusByRoute/' + str(route)
 
 	# Formulate URL request and format response as json object
-	response = urllib.request.urlopen(base + query, timeout=30)
-	str_response = response.readall().decode('utf-8')
-	buses = json.loads(str_response)
+	url = base+query
+	response = requests.get(url)
+	buses = response.json()
 
 	# Prints entirety of json response
 	#print(buses)
