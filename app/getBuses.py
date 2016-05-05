@@ -30,7 +30,8 @@ def getBuses(route=''):
 	# For each bus in response, print a few pieces of data.
 	lst = []
 	for bus in buses:
-		lst.append(bus['ROUTE'] + '  LAT:' + bus['LATITUDE'] + '  LON:' + bus['LONGITUDE'] + '  ADHER:' + bus['ADHERENCE'] + '  VEHICLE:' + bus['VEHICLE'] + '\n')
+		lst.append({'route':bus['ROUTE'],'lat':bus['LATITUDE'],'lon':bus['LONGITUDE'],'adher':bus['ADHERENCE'],'vehicle':bus['VEHICLE'],'msgtime':bus['MSGTIME']})
+	lst.reverse()
 	return lst
 
 def main():
