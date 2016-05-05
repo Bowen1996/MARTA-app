@@ -43,6 +43,21 @@ function initialize() {
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
+
+  var image = 'http://nikhilkulkarni.org/navicon.png';
+  var busList = {{ busList|tojson }};
+
+  busList.forEach(function(bus) {
+      console.log(bus)
+      var pos = new google.maps.LatLng(parseFloat(bus['lat']), parseFloat(bus['lon']));
+      var beachMarker = new google.maps.Marker({
+      position: pos,
+      map: map,
+      icon: image
+      });
+    });
+
+
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
   directionsDisplay.setMap(map);
