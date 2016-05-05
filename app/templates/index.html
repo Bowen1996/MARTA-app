@@ -1,24 +1,66 @@
-<html>
-  <head>
-    <title>MARTA</title>
-  </head>
-  <body>
-      <h1>Hello, {{ user.nickname }}!</h1>
-  </body>
-    <table>
-        <tr>
-            <th>Route</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Time</th>
-        </tr>
-      {% for bus in busList %}
-        <tr>
-            <td>{{ bus['route'] }}</td>
-            <td>{{ bus['lat'] }}</td>
-            <td>{{ bus['lon'] }}</td>
-            <td>{{ bus['msgtime'] }}</td>
-        </tr>
-      {% endfor %}
-    </table>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div id='map-canvas'></div>
+<table>
+    <tr>
+        <th>Route</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Time</th>
+    </tr>
+  {% for bus in busList %}
+    <tr>
+        <td>{{ bus['route'] }}</td>
+        <td>{{ bus['lat'] }}</td>
+        <td>{{ bus['lon'] }}</td>
+        <td>{{ bus['msgtime'] }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+<script type="text/javascript">
+function initialize() {
+    // $("#map-canvas").hide();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(41.850033, -87.6500523) //INPUT CURRENT USER LOCATION HERE
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+  var control = document.getElementById('control');
+  control.style.display = 'block';
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+}
+window.onload = function () { initialize() };
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<style>
+#map-canvas {
+    background-color: #4f585d;
+    margin-top: 40px;
+    border-top: rgba(109, 118, 123, 0.2) 20px solid;
+    border-bottom: rgba(109, 118, 123, 0.2) 20px solid;
+    height:90%;
+}
+</style>
+{% endblock %}
