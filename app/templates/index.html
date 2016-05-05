@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>MARTA</title>
+  </head>
+  <body>
+      <h1>Hello, {{ user.nickname }}!</h1>
+  </body>
+    <table>
+      {% for bus in busList %}
+        <tr><td>{{ bus }}</tr></td>
+      {% endfor %}
+    </table>
+</html>
