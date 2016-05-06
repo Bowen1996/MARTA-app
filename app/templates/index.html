@@ -79,6 +79,67 @@ function initialize() {
       busArray.push(beachMarker);
     });
 
+  //code for train stations
+
+  //north-south
+  var northSprings = {lat: 33.944, lng: -84.356};
+  var sandySprings = {lat: 33.933, lng: -84.352};
+  var dunwoody = {lat: 33.921, lng: -84.344};
+  var medicalCenter = {lat: 33.910, lng: -84.352};
+  var buckhead = {lat: 33.848, lng: -84.367};
+  var lindberghCenter = {lat: 33.822, lng: -84.367};
+  var artsCenter = {lat: 33.789, lng: -84.387};
+  var midtown = {lat: 33.781, lng: -84.386};
+  var northAve = {lat: 33.771, lng: -84.386};
+  var civicCenter = {lat: 33.776, lng: -84.387};
+  var peachTree = {lat: 33.759, lng: -84.387};
+  var fivePoints = {lat: 33.753, lng: -84.391};
+  var garnett = {lat: 33.748, lng: -84.396};
+  var westEnd = {lat: 33.735, lng: -84.412};
+  var oakLandCity = {lat: 33.716, lng: -84.425};
+  var lakewoodMcPherson = {lat: 33.7, lng: -84.429};
+  var eastPoint = {lat: 33.677, lng: -84.440};
+  var collegePark = {lat: 33.652, lng: -84.449};
+  var airPort = {lat: 33.641, lng: -84.446};
+
+  //east-west
+  var holmes = {lat: 33.754, lng: -84.467};
+  var westLake = {lat: 33.753, lng: -84.446};
+  var ashby = {lat: 33.756, lng: -84.417};
+  var vineCity = {lat: 33.756, lng: -84.403};
+  var domeGWCCPhilipsCNN = {lat: 33.756, lng: -84.397};
+  var georgiaState = {lat: 33.750, lng: -84.386};
+  var kingMemorial = {lat: 33.750, lng: -84.375};
+  var inmanParkReynoldstown = {lat: 33.757, lng: -84.353};
+  var edgewoodCandlerPark = {lat: 33.762, lng: -84.340};
+  var eastLake = {lat: 33.765, lng: -84.312};
+  var decatur = {lat: 33.775, lng: -84.296};
+  var avondale = {lat: 33.775, lng: -84.281};
+  var kensington = {lat: 33.772, lng: -84.251};
+  var indianCreek = {lat: 33.770, lng: -84.230};
+
+  //goldline
+  var doraville = {lat: 33.902, lng: -84.280};
+  var chamblee = {lat: 33.886, lng: -84.307};
+  var brookhavenOglethorpe = {lat: 33.860, lng: -84.340};
+  var lenox = {lat: 33.847, lng: -84.356};
+
+
+
+  var trainStations = [northSprings, sandySprings, dunwoody, medicalCenter, buckhead, artsCenter, midtown, northAve, civicCenter, peachTree,
+    fivePoints, garnett, westEnd, oakLandCity, lakewoodMcPherson, eastPoint, collegePark, airPort, holmes, westLake, ashby, vineCity, domeGWCCPhilipsCNN,
+    georgiaState, kingMemorial, inmanParkReynoldstown, edgewoodCandlerPark, eastLake, decatur, avondale, kensington, indianCreek, doraville, chamblee,
+    brookhavenOglethorpe, lenox];
+
+  trainStations.forEach(function(train) {
+    var stationPos = new google.maps.LatLng(parseFloat(train['lat']), parseFloat(train['lng']));
+    var trainStationImage = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+    var stationMarker = new google.maps.Marker({
+      position: stationPos,
+      map: map,
+      icon: trainStationImage
+    });
+  });
 
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
@@ -88,6 +149,7 @@ function initialize() {
   var control = document.getElementById('control');
   control.style.display = 'block';
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
 }
 window.onload = function () { initialize() };
 google.maps.event.addDomListener(window, 'load', initialize);
