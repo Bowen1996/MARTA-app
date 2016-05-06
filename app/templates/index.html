@@ -8,10 +8,10 @@
         <div class="col-md-6" id='bus-list'>
             <div class="list-group">
                 <a href="#search"><button type="button" class="list-group-item">Search For Destination</button></a>
-                {% for bus in busList %}
+                {% for i in range(0,10): %}
                     <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">Route {{ bus['route'] }}</h4>
-                        <p class="list-group-item-text">Lat: {{ bus['lat'] }} Long: {{ bus['lon'] }} Time: {{ bus['msgtime'] }}</p>
+                        <h4 class="list-group-item-heading">Route {{ busList[i]['route'] }}</h4>
+                        <p class="list-group-item-text">Lat: {{ busList[i]['lat'] }} Long: {{ busList[i]['lon'] }} Time: {{ busList[i]['msgtime'] }}</p>
                     </a>
                 {% endfor %}
             </div>
@@ -197,7 +197,7 @@ $(function () {
     height:95%;
 }
 #bus-list {
-    margin-top: 65px;
+    margin-top: 55px;
 }
 #search {
     position: fixed;
