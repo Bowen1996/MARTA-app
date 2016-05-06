@@ -6,5 +6,4 @@ from getBuses import getBuses
 @app.route('/index')
 def index():
     busList = getBuses()
-    user = {"nickname" : "Bowen"}
-    return render_template('index.html',user=user,busList=busList)
+    return render_template('index.html',busList=busList)

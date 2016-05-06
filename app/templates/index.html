@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<div id='map-canvas'></div>
-<table>
-    <tr>
-        <th>Route</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
-        <th>Time</th>
-    </tr>
-  {% for bus in busList %}
-    <tr>
-        <td>{{ bus['route'] }}</td>
-        <td>{{ bus['lat'] }}</td>
-        <td>{{ bus['lon'] }}</td>
-        <td>{{ bus['msgtime'] }}</td>
-    </tr>
-  {% endfor %}
-</table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div id='map-canvas'></div>
+        </div>
+        <div class="col-md-6" id='bus-list'>
+            <div class="list-group">
+                {% for bus in busList %}
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Route {{ bus['route'] }}</h4>
+                        <p class="list-group-item-text">Lat: {{ bus['lat'] }} Long: {{ bus['lon'] }} Time: {{ bus['msgtime'] }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
@@ -48,7 +48,6 @@ function initialize() {
   var busList = {{ busList|tojson }};
 
   busList.forEach(function(bus) {
-      console.log(bus)
       var pos = new google.maps.LatLng(parseFloat(bus['lat']), parseFloat(bus['lon']));
       var beachMarker = new google.maps.Marker({
       position: pos,
@@ -77,7 +76,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
     margin-top: 40px;
     border-top: rgba(109, 118, 123, 0.2) 20px solid;
     border-bottom: rgba(109, 118, 123, 0.2) 20px solid;
-    height:90%;
+    height:95%;
+}
+#bus-list {
+    margin-top: 55px;
 }
 </style>
 {% endblock %}
